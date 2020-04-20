@@ -590,3 +590,7 @@ ol {
 #app .playlist_con .list_box .items .item:hover .desc-wrap {
   top: 0;
 }
+#app .playlist_con .laypage {
+  width: 400px;
+  margin: 0 auto;
+}

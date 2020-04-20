@@ -1,6 +1,6 @@
 <template>
   <div class="playlist_con">
-      <!-- top推荐 -->
+       <!-- top推荐 -->
        <div class="top-card">
           <div class="icon-wrap">
             <!-- 封面 -->
@@ -23,21 +23,126 @@
        </div>
        <!-- tab栏 -->
        <el-tabs v-model="activeName">
-          <el-tab-pane label="全部" name="全部"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="欧美" name="欧美"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="华语" name="华语"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="说唱" name="说唱"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="摇滚" name="摇滚"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="民谣" name="民谣"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="电子" name="电子"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="轻音乐" name="轻音乐"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="影视原声" name="影视原声"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="ACG" name="ACG"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="怀旧" name="怀旧"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="治愈" name="治愈"><listbar :list='playlists'></listbar></el-tab-pane>
-          <el-tab-pane label="旅行" name="旅行"><listbar :list='playlists'></listbar></el-tab-pane>
+          <el-tab-pane 
+          label="全部" 
+          name="全部">
+            <listbar 
+              :list='playlists' 
+              :total='total'
+              :page='page'
+              @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="欧美" 
+          name="欧美">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="华语" 
+          name="华语">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="说唱" 
+          name="说唱">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="摇滚" 
+          name="摇滚">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="民谣" 
+          name="民谣">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="电子" 
+          name="电子">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="轻音乐" 
+          name="轻音乐">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="影视原声" 
+          name="影视原声">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="ACG" 
+          name="ACG">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="怀旧" 
+          name="怀旧">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="治愈" 
+          name="治愈">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
+          <el-tab-pane 
+          label="旅行" 
+          name="旅行">
+            <listbar 
+            :list='playlists'
+            :total='total'
+            :page='page'
+            @pageVal='pageVal'></listbar>
+          </el-tab-pane>
 
        </el-tabs>
+
        
   </div>
 </template>
@@ -46,16 +151,18 @@
 import axios from 'axios'
 import listbar from './002.listbar'
 export default {
-    components:{
+  components:{
       listbar
 
   },
 
   data(){
      return {
-        activeName: '全部',
-        topList:{},  //顶部推荐歌单
-        playlists:[]  //歌单列表
+        activeName: '全部',   //当前选中数据
+        topList: {},          //顶部推荐歌单
+        playlists: [],        //歌单列表
+        total: 0,             //总条数
+        page: 1,              //页码
       };
   },
 
@@ -64,9 +171,10 @@ export default {
 
         // 获取顶部精品歌单
         this.getTopList(),
-
         // 获取歌单列表
-        this.getPlaylists()
+        this.getPlaylists(),
+        // 修改页码为1
+        this.page = 1;
       }
   },
 
@@ -74,11 +182,11 @@ export default {
 
     // 获取顶部精品歌单
     this.getTopList(),
-
     // 获取歌单列表
     this.getPlaylists()
 
   },
+
   methods:{
 
     // 抽取接口1:顶部精品歌单
@@ -105,14 +213,24 @@ export default {
         method:'get',
         params:{
           limit:10,
-          offset:0,
+          offset: (this.page-1)*10,
           cat:this.activeName
         }
       }).then(res=>{
-        // console.log(res)
+        // 保存歌单列表
         this.playlists = res.data.playlists
-        // console.log(this.playlists)
+        // 保存总条数
+        this.total = res.data.total
+        // console.log(this.total)
       })
+    },
+    // 
+    pageVal:function(pageVal){
+      this.page = pageVal;
+      console.log("当前页数:"+this.page);
+      // 获取歌单列表
+      this.getPlaylists();
+
     }
   }
 
